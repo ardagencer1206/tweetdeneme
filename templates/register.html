@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Kayıt Ol · App{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="glass card border-0 shadow-lg p-4 p-md-5">
+      <h3 class="text-center fw-bold mb-4">
+        <i class="bi bi-person-plus-fill me-2"></i> Kayıt Ol
+      </h3>
+      
+      <form method="post" novalidate>
+        {{ form.hidden_tag() }}
+        
+        <div class="mb-3">
+          {{ form.email.label(class="form-label fw-semibold") }}
+          {{ form.email(class="form-control form-control-lg rounded-pill") }}
+        </div>
+        
+        <div class="mb-3">
+          {{ form.password.label(class="form-label fw-semibold") }}
+          {{ form.password(class="form-control form-control-lg rounded-pill") }}
+        </div>
+        
+        <div class="d-grid">
+          {{ form.submit(class="btn btn-success btn-lg rounded-pill") }}
+        </div>
+      </form>
+      
+      <div class="text-center mt-3">
+        <small class="text-muted">
+          Zaten hesabın var mı? 
+          <a href="{{ url_for('login') }}" class="fw-semibold">Giriş yap</a>
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

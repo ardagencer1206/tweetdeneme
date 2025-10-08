@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Ana Sayfa · App{% endblock %}
+
+{% block page_header %}
+<section class="text-center py-4 py-md-5">
+  <h1 class="display-5 fw-bold mb-2">Hoş geldiniz</h1>
+  <p class="lead text-secondary mb-4">
+    Güvenli ve hızlı kullanıcı yönetimi. Glass UI ile modern deneyim.
+  </p>
+
+  {% if current_user.is_authenticated %}
+    <div class="d-inline-flex align-items-center gap-2 glass rounded-3xl px-3 py-2">
+      <i class="bi bi-person-check"></i>
+      <span>Giriş yapıldı: <strong>{{ current_user.email }}</strong></span>
+    </div>
+  {% else %}
+    <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
+      <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">
+        <i class="bi bi-person-plus me-1"></i> Kayıt Ol
+      </a>
+      <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg">
+        <i class="bi bi-box-arrow-in-right me-1"></i> Giriş Yap
+      </a>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}
+
+{% block content %}
+<div class="row g-3 g-md-4">
+  <div class="col-12 col-md-4">
+    <div class="card glass h-100">
+      <div class="card-body">
+        <h5 class="card-title"><i class="bi bi-shield-lock me-1"></i> Güvenlik</h5>
+        <p class="card-text text-secondary mb-0">CSRF koruması ve hash’li şifreler ile güvenli oturumlar.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="card glass h-100">
+      <div class="card-body">
+        <h5 class="card-title"><i class="bi bi-hdd-network me-1"></i> Altyapı</h5>
+        <p class="card-text text-secondary mb-0">Railway üzerinde MySQL ile ölçeklenebilir mimari.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="card glass h-100">
+      <div class="card-body">
+        <h5 class="card-title"><i class="bi bi-phone me-1"></i> Mobil Uyum</h5>
+        <p class="card-text text-secondary mb-0">Bootstrap 5 ve glass-morphism ile modern arayüz.</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
