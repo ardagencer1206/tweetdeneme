@@ -1,0 +1,45 @@
+<div class="card glass border-0 mb-3">
+  <div class="card-body">
+    <div class="d-flex align-items-start">
+      <img src="{{ url_for('static', filename='avatars/' ~ (user.avatar or 'default.png')) }}"
+           class="rounded-circle avatar-sm me-3" alt="avatar">
+      <div class="flex-grow-1">
+        <div>
+          <a class="fw-semibold brand-gradient" href="{{ url_for('profile', username=user.username) }}">
+            @{{ user.username or user.email.split('@')[0] }}
+          </a>
+          <small class="text-muted ms-2">{{ tweet.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+        </div>
+        <p class="mt-2 mb-3">{{ tweet.body }}</p>
+
+        <form action="{{ url_for('like', tweet_id=tweet.id) }}" method="post" class="d-inline">
+          {{ csrf_token() }}
+          <button class="btn btn-sm btn-outline-primary rounded-pill">
+            ❤️ {{ tweet.likes|length }}
+          </button>
+        </form>
+
+        <button class="btn btn-sm btn-outline-secondary rounded-pill" data-bs-toggle="collapse"
+                data-bs-target="#c{{ tweet.id }}">Yorumlar ({{ tweet.comments|length }})</button>
+
+        <div id="c{{ tweet.id }}" class="collapse mt-3">
+          {% for c in tweet.comments %}
+            <div class="d-flex mb-2">
+              <strong class="me-2">@{{ c.user.username or c.user.email.split('@')[0] }}</strong>
+              <span>{{ c.body }}</span>
+              <small class="text-muted ms-2">{{ c.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+            </div>
+          {% endfor %}
+
+          {% if current_user.is_authenticated %}
+            <form action="{{ url_for('comment', tweet_id=tweet.id) }}" method="post" class="d-flex gap-2 mt-2">
+              {{ csrf_token() }}
+              <input name="body" class="form-control form-control-sm rounded-pill" placeholder="Yorum yaz">
+              <button class="btn btn-sm btn-primary rounded-pill">Gönder</button>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
