@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}@{{ u.username or u.email.split('@')[0] }} · Profil{% endblock %}
+{% block content %}
+<div class="glass card border-0 shadow mb-4">
+  <div class="card-body d-flex align-items-center">
+    <img src="{{ url_for('static', filename='avatars/' ~ (u.avatar or 'default.png')) }}"
+         class="rounded-circle avatar-lg me-3" alt="avatar">
+    <div>
+      <h5 class="mb-0">@{{ u.username or u.email.split('@')[0] }}</h5>
+      <small class="text-muted">{{ u.email }}</small>
+      {% if u.bio %}<p class="mb-0 mt-2">{{ u.bio }}</p>{% endif %}
+    </div>
+  </div>
+</div>
+
+{% for tweet in tweets %}
+  {% set user = u %}
+  {% include "_tweet.html" %}
+{% else %}
+  <div class="text-center text-muted">Bu profilde henüz tweet yok.</div>
+{% endfor %}
+{% endblock %}
