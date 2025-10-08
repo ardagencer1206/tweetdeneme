@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Profil Ayarları{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-6 col-lg-5">
+    <div class="glass card border-0 shadow p-4">
+      <h4 class="mb-3">Profil</h4>
+      <form method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+          {{ form.username.label(class="form-label") }}
+          {{ form.username(class="form-control rounded-pill") }}
+          {% for e in form.username.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+        </div>
+
+        <div class="mb-3">
+          {{ form.bio.label(class="form-label") }}
+          {{ form.bio(class="form-control rounded-4", rows="3") }}
+          {% for e in form.bio.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+        </div>
+
+        <div class="mb-3">
+          {{ form.avatar.label(class="form-label") }}
+          {{ form.avatar(class="form-control") }}
+          <small class="text-muted">jpg, jpeg, png, webp • max 2MB</small>
+          {% for e in form.avatar.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+        </div>
+
+        <div class="d-grid">
+          {{ form.submit(class="btn btn-primary rounded-pill") }}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
