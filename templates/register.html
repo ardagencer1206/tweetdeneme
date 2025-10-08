@@ -1,39 +1,26 @@
 {% extends "base.html" %}
-
-{% block title %}Kayıt Ol · App{% endblock %}
-
+{% block title %}Kayıt · App{% endblock %}
 {% block content %}
 <div class="row justify-content-center">
   <div class="col-12 col-md-6 col-lg-4">
-    <div class="glass card border-0 shadow-lg p-4 p-md-5">
-      <h3 class="text-center fw-bold mb-4">
-        <i class="bi bi-person-plus-fill me-2"></i> Kayıt Ol
-      </h3>
-      
+    <div class="glass card border-0 shadow p-4">
+      <h3 class="mb-3">Kayıt Ol</h3>
       <form method="post" novalidate>
         {{ form.hidden_tag() }}
-        
         <div class="mb-3">
-          {{ form.email.label(class="form-label fw-semibold") }}
-          {{ form.email(class="form-control form-control-lg rounded-pill") }}
+          {{ form.email.label(class="form-label") }}
+          {{ form.email(class="form-control rounded-pill", placeholder="e-posta") }}
+          {% for e in form.email.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
         </div>
-        
         <div class="mb-3">
-          {{ form.password.label(class="form-label fw-semibold") }}
-          {{ form.password(class="form-control form-control-lg rounded-pill") }}
+          {{ form.password.label(class="form-label") }}
+          {{ form.password(class="form-control rounded-pill", placeholder="en az 6 karakter") }}
+          {% for e in form.password.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
         </div>
-        
         <div class="d-grid">
-          {{ form.submit(class="btn btn-success btn-lg rounded-pill") }}
+          {{ form.submit(class="btn btn-primary rounded-pill") }}
         </div>
       </form>
-      
-      <div class="text-center mt-3">
-        <small class="text-muted">
-          Zaten hesabın var mı? 
-          <a href="{{ url_for('login') }}" class="fw-semibold">Giriş yap</a>
-        </small>
-      </div>
     </div>
   </div>
 </div>
